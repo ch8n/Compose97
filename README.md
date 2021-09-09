@@ -7,7 +7,7 @@ Recent tweet from [Marton Braun](https://twitter.com/zsmb13/status/1434834638971
 > Hanging around Marton is fun and he always push out great content for community. I would like to dedicate this project to him.
 
 ## Preview (Development in Process)
-![](./wip_preview.png)
+<img src="./wip_preview.png" height="400">
 
 ## Features
 - [ ] Start Menu
