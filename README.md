@@ -1,4 +1,4 @@
-# Compose-windows97
+# [Compose-windows97](https://chetangupta.net/compose-97/)
 A Jetpack Compose Note writing application with Windows 97 theme
 
 ## Inspiration 
