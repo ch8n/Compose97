@@ -17,14 +17,14 @@ import androidx.compose.ui.unit.dp
 import io.github.ch8n.compose97.R
 import io.github.ch8n.compose97.ui.theme.Compose97Theme
 
-data class StartBarItemState(
+data class StartMenuItemState(
     val iconId: Int,
     val name: String
 )
 
 @Composable
-fun StartBarItem(
-    state: State<StartBarItemState>,
+fun StartMenuItem(
+    state: State<StartMenuItemState>,
     modifier: Modifier,
     onItemClick: () -> Unit = {},
 ) {
@@ -51,13 +51,13 @@ fun StartBarItem(
 
 @Preview
 @Composable
-fun StartBarItemPreview() {
+fun StartMenuItemPreview() {
     Compose97Theme {
-        val state = StartBarItemState(
+        val state = StartMenuItemState(
             iconId = R.drawable.my_computer_32x32,
             name = "My Computer",
         )
-        StartBarItem(
+        StartMenuItem(
             state = remember { mutableStateOf(state) },
             modifier = Modifier
                 .fillMaxWidth()
