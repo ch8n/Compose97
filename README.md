@@ -9,10 +9,8 @@ Recent tweet from [Marton Braun](https://twitter.com/zsmb13/status/1434834638971
 ## Preview (Development in Process)
 <table>
   <tr>
-    <img src="./preview1.png" height="460">
-  </tr>
-  <tr>
-    <img src="./preview2.png" height="460">
+    <th><img src="./preview1.png" height="460"></th>
+    <th><img src="./preview2.png" height="460"></th>
   </tr>
 </table>
 
