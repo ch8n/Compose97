@@ -19,11 +19,10 @@ Recent tweet from [Marton Braun](https://twitter.com/zsmb13/status/1434834638971
 
 
 ## Features
-- [ ] Start Menu
-- [ ] Desktop
-- [ ] Explorer Window
-- [ ] My Computer > C drive
-- [ ] Recycle Bin
+- [x] Start Menu
+- [x] Desktop
+- [x] My Computer > C drive
+- [x] Recycle Bin
 - [ ] Internet Explorer > portfolio
 - [ ] NotePad > Create/Update/Delete Notes  
 - [ ] Right Click menu on Desktop 

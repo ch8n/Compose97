@@ -1,5 +1,6 @@
 package io.github.ch8n.compose97.ui.theme
 
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -12,6 +13,8 @@ private val microSoft97 = FontFamily(
     Font(R.font.ms_sans_serif_bold, FontWeight.Bold),
     Font(R.font.ms_sans_serif, FontWeight.Normal)
 )
+
+
 
 val typography = Typography(
     h1 = TextStyle(
@@ -51,4 +54,8 @@ val typography = Typography(
         fontWeight = FontWeight.SemiBold,
         fontSize = 12.sp
     )
+)
+
+val notePadTextStyle = typography.subtitle1.copy(
+    fontWeight = FontWeight.SemiBold
 )
