@@ -5,9 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,26 +14,25 @@ import androidx.compose.ui.unit.dp
 import io.github.ch8n.compose97.R
 import io.github.ch8n.compose97.ui.theme.Compose97Theme
 
-data class StartMenuItemState(
+data class StartMenuItemProps(
     val iconId: Int,
-    val name: String
+    val name: String,
+    val onItemClick: () -> Unit
 )
 
 @Composable
 fun StartMenuItem(
-    state: State<StartMenuItemState>,
     modifier: Modifier,
-    onItemClick: () -> Unit = {},
+    props: StartMenuItemProps
 ) {
     Row(
         modifier = modifier
-            .clickable {
-                onItemClick.invoke()
-            },
+            .clickable(onClick = props.onItemClick)
+            .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            painter = painterResource(id = state.value.iconId),
+            painter = painterResource(id = props.iconId),
             contentDescription = "",
             tint = Color.Unspecified,
             modifier = Modifier.size(width = 28.dp, height = 28.dp)
@@ -44,7 +40,7 @@ fun StartMenuItem(
 
         Spacer(modifier = Modifier.width(8.dp))
 
-        Text(text = state.value.name)
+        Text(text = props.name)
     }
 }
 
@@ -53,19 +49,14 @@ fun StartMenuItem(
 @Composable
 fun StartMenuItemPreview() {
     Compose97Theme {
-        val state = StartMenuItemState(
-            iconId = R.drawable.my_computer_32x32,
-            name = "My Computer",
-        )
         StartMenuItem(
-            state = remember { mutableStateOf(state) },
+            props = StartMenuItemProps(
+                iconId = R.drawable.my_computer_32x32,
+                name = "My Computer",
+                onItemClick = {}
+            ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
-                .wrapContentHeight(),
-            onItemClick = {
-
-            }
         )
     }
 }
