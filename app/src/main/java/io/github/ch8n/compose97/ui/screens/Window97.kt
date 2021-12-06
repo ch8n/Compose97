@@ -1,15 +1,17 @@
 package io.github.ch8n.compose97.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import io.github.ch8n.compose97.ui.components.Preview
+import io.github.ch8n.compose97.ui.components.desktop.Desktop
 import io.github.ch8n.compose97.ui.components.startbar.StartMenu
 import io.github.ch8n.compose97.ui.components.taskbar.StartBar
 import io.github.ch8n.compose97.ui.components.taskbar.StartBarProps
@@ -30,6 +32,13 @@ fun Window97() {
                 .background(Teal)
                 .weight(1f, fill = true),
         ) {
+
+            Desktop(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(),
+                desktopItemItems = viewModel.desktopItems
+            )
 
             if (isStartMenuOpen) {
                 StartMenu(

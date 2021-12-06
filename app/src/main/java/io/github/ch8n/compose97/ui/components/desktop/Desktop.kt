@@ -1,6 +1,5 @@
 package io.github.ch8n.compose97.ui.components.desktop
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -10,7 +9,6 @@ import androidx.compose.ui.unit.dp
 import io.github.ch8n.compose97.R
 
 
-@ExperimentalFoundationApi
 @Composable
 fun Desktop(
     modifier: Modifier,
@@ -21,14 +19,13 @@ fun Desktop(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             desktopItemItems.forEach {
-                Spacer(modifier = Modifier.size(8.dp))
+                Spacer(modifier = Modifier.size(12.dp))
                 DesktopItem(itemProps = it)
             }
         }
     }
 }
 
-@ExperimentalFoundationApi
 @Preview
 @Composable
 fun DesktopPreview() {

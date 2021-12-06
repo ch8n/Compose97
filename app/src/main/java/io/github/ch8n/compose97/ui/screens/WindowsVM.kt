@@ -1,6 +1,7 @@
 package io.github.ch8n.compose97.ui.screens
 
 import io.github.ch8n.compose97.R
+import io.github.ch8n.compose97.ui.components.desktop.DesktopItemProps
 import io.github.ch8n.compose97.ui.components.startbar.StartMenuItemProps
 
 class WindowsVM {
@@ -30,6 +31,33 @@ class WindowsVM {
             iconId = R.drawable.notepad_32x32,
             name = "Notepad",
             onItemClick = {}
+        ),
+    )
+    val desktopItems = listOf(
+        DesktopItemProps(
+            iconResId = R.drawable.my_computer_32x32,
+            itemName = "My Computer",
+            onItemClicked = {}
+        ),
+        DesktopItemProps(
+            iconResId = R.drawable.recycle_bin_32x32,
+            itemName = "Recycle Bin",
+            onItemClicked = {},
+        ),
+        DesktopItemProps(
+            iconResId = R.drawable.my_documents_folder_32x32,
+            itemName = "My Documents",
+            onItemClicked = {},
+        ),
+        DesktopItemProps(
+            iconResId = R.drawable.internet_explorer_32x32,
+            itemName = "Internet\nExplorer",
+            onItemClicked = {},
+        ),
+        DesktopItemProps(
+            iconResId = R.drawable.notepad_32x32,
+            itemName = "Notepad",
+            onItemClicked = {},
         ),
     )
 
