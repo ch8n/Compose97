@@ -1,4 +1,4 @@
-package io.github.ch8n.compose97.ui.components.startbar
+package io.github.ch8n.compose97.ui.components.startMenu
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

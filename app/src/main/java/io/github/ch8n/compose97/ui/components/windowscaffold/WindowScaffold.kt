@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
@@ -20,15 +21,32 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.ch8n.compose97.R
-import io.github.ch8n.compose97.ui.theme.Black
-import io.github.ch8n.compose97.ui.theme.Gray
-import io.github.ch8n.compose97.ui.theme.Silver
-import io.github.ch8n.compose97.ui.theme.White
+import io.github.ch8n.compose97.ui.theme.*
+
+data class WindowProps(
+    val title: String,
+    @DrawableRes val mainIcon: Int,
+    val onMinimiseClicked: () -> Unit,
+    val onMaximiseClicked: () -> Unit,
+    val onCloseClicked: () -> Unit,
+    val toolbar: List<ToolbarOptionProp>,
+    val navToolbar: List<NavToolbarProp>,
+    val addressBarPath: String
+)
+
+data class ToolbarOptionProp(
+    val name: String,
+    val onOptionClicked: () -> Unit,
+)
+
+data class NavToolbarProp(
+    val name: String,
+    val onOptionClicked: () -> Unit,
+)
 
 @Composable
 fun WindowScaffold(
-    title: String,
-    @DrawableRes icon: Int,
+    props: WindowProps,
     content: @Composable () -> Unit
 ) {
     Column(
@@ -37,51 +55,7 @@ fun WindowScaffold(
             .border(2.dp, Silver)
     ) {
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Gray)
-                .padding(8.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    painter = painterResource(id = icon),
-                    modifier = Modifier.size(16.dp),
-                    contentDescription = null,
-                    tint = Color.Unspecified
-                )
-                Spacer(modifier = Modifier.width(4.dp))
-                Text(text = title, color = White, fontWeight = FontWeight.SemiBold)
-            }
-
-            Row {
-                Icon(
-                    painter = painterResource(id = icon),
-                    modifier = Modifier.size(16.dp),
-                    contentDescription = null,
-                    tint = Color.Unspecified
-                )
-                Spacer(modifier = Modifier.width(4.dp))
-                Icon(
-                    painter = painterResource(id = icon),
-                    modifier = Modifier.size(16.dp),
-                    contentDescription = null,
-                    tint = Color.Unspecified
-                )
-                Spacer(modifier = Modifier.width(4.dp))
-                Icon(
-                    painter = painterResource(id = icon),
-                    modifier = Modifier.size(16.dp),
-                    contentDescription = null,
-                    tint = Color.Unspecified
-                )
-            }
-        }
+        MainStatusBar(props)
 
         Row(
             modifier = Modifier
@@ -121,12 +95,88 @@ fun WindowScaffold(
     }
 }
 
+@Composable
+private fun MainStatusBar(props: WindowProps) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(
+                brush = Brush.horizontalGradient(
+                    colors = listOf(
+                        Navy,
+                        RoyalBlue
+                    )
+                )
+            )
+            .padding(8.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(id = props.mainIcon),
+                modifier = Modifier.size(16.dp),
+                contentDescription = null,
+                tint = Color.Unspecified
+            )
+            Spacer(modifier = Modifier.width(4.dp))
+            Text(text = props.title, color = White, fontWeight = FontWeight.SemiBold)
+        }
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_mini_toolbar),
+                modifier = Modifier
+                    .size(16.dp)
+                    .border(1.dp, Black)
+                    .background(Silver)
+                    .padding(4.dp),
+                contentDescription = null,
+                tint = Black
+            )
+            Icon(
+                painter = painterResource(id = R.drawable.ic_maxi_toolbar),
+                modifier = Modifier
+                    .size(16.dp)
+                    .border(1.dp, Black)
+                    .background(Silver)
+                    .padding(4.dp),
+                contentDescription = null,
+                tint = Black
+            )
+            Icon(
+                painter = painterResource(id = R.drawable.ic_close_toolbar),
+                modifier = Modifier
+                    .size(16.dp)
+                    .border(1.dp, Black)
+                    .background(Silver)
+                    .padding(4.dp),
+                contentDescription = null,
+                tint = Black
+            )
+        }
+    }
+}
+
 @Preview
 @Composable
 fun WindowScaffoldPreview() {
     WindowScaffold(
-        title = """C:\\""",
-        icon = R.drawable.my_computer_32x32
+        props = WindowProps(
+            title = """C:\\""",
+            mainIcon = R.drawable.my_computer_32x32,
+            onCloseClicked = {},
+            onMaximiseClicked = {},
+            onMinimiseClicked = {},
+            toolbar = emptyList(),
+            navToolbar = emptyList(),
+            addressBarPath = """C:\\"""
+        )
     ) {
 
     }
