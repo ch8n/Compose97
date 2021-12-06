@@ -20,7 +20,6 @@ import io.github.ch8n.compose97.ui.theme.Black
 import io.github.ch8n.compose97.ui.theme.Silver
 import io.github.ch8n.compose97.ui.theme.White
 
-
 data class WindowAddressProps(
     @DrawableRes val iconRes: Int,
     val path: String,
@@ -61,16 +60,13 @@ fun WindowAddressBar(
                 tint = Color.Unspecified
             )
 
-
             Text(
                 text = props.path,
                 style = MaterialTheme.typography.caption,
             )
         }
-
     }
 }
-
 
 @Preview
 @Composable

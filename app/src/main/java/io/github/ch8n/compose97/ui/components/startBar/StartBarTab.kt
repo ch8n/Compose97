@@ -30,7 +30,6 @@ fun StarBarTabPreview() {
                 name = "Start",
                 iconRes = R.drawable.ic_windows95,
                 onClickTab = {
-
                 }
             )
         )

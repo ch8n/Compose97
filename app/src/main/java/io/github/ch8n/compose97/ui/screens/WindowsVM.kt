@@ -60,7 +60,4 @@ class WindowsVM {
             onItemClicked = {},
         ),
     )
-
-
-
 }

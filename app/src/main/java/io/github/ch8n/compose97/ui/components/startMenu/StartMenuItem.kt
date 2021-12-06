@@ -44,7 +44,6 @@ fun StartMenuItem(
     }
 }
 
-
 @Preview
 @Composable
 fun StartMenuItemPreview() {

@@ -23,7 +23,6 @@ data class WindowProps(
     val addressBar: WindowAddressProps
 )
 
-
 @Composable
 fun WindowScaffold(
     props: WindowProps,
@@ -91,7 +90,6 @@ fun WindowScaffold(
     }
 }
 
-
 @Preview
 @Composable
 fun WindowScaffoldPreview() {
@@ -152,6 +150,5 @@ fun WindowScaffoldPreview() {
         ),
         modifier = Modifier.fillMaxSize()
     ) {
-
     }
 }

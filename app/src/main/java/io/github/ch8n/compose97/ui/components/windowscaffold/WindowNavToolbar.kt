@@ -65,7 +65,6 @@ fun WindowNavToolbar(
                 onClick = it.onOptionClicked
             )
         }
-
     }
 }
 
@@ -92,7 +91,6 @@ fun NavButton(
             text = label,
             style = MaterialTheme.typography.caption,
         )
-
     }
 }
 

@@ -8,7 +8,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.ch8n.compose97.R
 
-
 @Composable
 fun Desktop(
     modifier: Modifier,

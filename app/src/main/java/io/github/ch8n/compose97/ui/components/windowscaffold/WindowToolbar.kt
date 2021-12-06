@@ -14,12 +14,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.ch8n.compose97.ui.theme.Silver
 
-
 data class ToolbarGroupProp(
     val groupName: String,
     val onGroupClicked: () -> Unit,
 )
-
 
 @Preview
 @Composable

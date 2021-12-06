@@ -15,7 +15,6 @@ import io.github.ch8n.compose97.R
 import io.github.ch8n.compose97.ui.theme.Gray
 import io.github.ch8n.compose97.ui.theme.Silver
 
-
 data class StartBarProps(
     val onStartButtonClicked: () -> Unit,
     val tabs: List<StartTabProps>
@@ -48,12 +47,13 @@ fun StartBar(
             )
         }
         item {
-            Surface(modifier = Modifier
-                .width(1.dp)
-                .fillMaxHeight(0.8f),
+            Surface(
+                modifier = Modifier
+                    .width(1.dp)
+                    .fillMaxHeight(0.8f),
                 elevation = 4.dp,
                 color = Gray
-            ){}
+            ) {}
         }
         items(props.tabs) { tab ->
             StartBarTab(
@@ -83,7 +83,6 @@ fun StartBarPreview() {
                     name = "My Computer",
                     iconRes = R.drawable.my_computer_32x32,
                     onClickTab = {
-
                     }
                 )
             ),

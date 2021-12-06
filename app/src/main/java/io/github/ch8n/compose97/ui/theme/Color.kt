@@ -9,4 +9,3 @@ val RoyalBlue = Color(0xFF0d74c6)
 val White = Color(0xFFFFFFFF)
 val Black = Color(0xFF101010)
 val Gray = Color(0xFF808080)
-
