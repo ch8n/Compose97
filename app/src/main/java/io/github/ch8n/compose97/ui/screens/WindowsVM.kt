@@ -10,7 +10,8 @@ class WindowsVM {
         StartMenuItemProps(
             iconId = R.drawable.my_computer_32x32,
             name = "My Computer",
-            onItemClick = {}
+            onItemClick = {
+            }
         ),
         StartMenuItemProps(
             iconId = R.drawable.recycle_bin_32x32,
@@ -37,27 +38,22 @@ class WindowsVM {
         DesktopItemProps(
             iconResId = R.drawable.my_computer_32x32,
             itemName = "My Computer",
-            onItemClicked = {}
         ),
         DesktopItemProps(
             iconResId = R.drawable.recycle_bin_32x32,
             itemName = "Recycle Bin",
-            onItemClicked = {},
         ),
         DesktopItemProps(
             iconResId = R.drawable.my_documents_folder_32x32,
             itemName = "My Documents",
-            onItemClicked = {},
         ),
         DesktopItemProps(
             iconResId = R.drawable.internet_explorer_32x32,
             itemName = "Internet\nExplorer",
-            onItemClicked = {},
         ),
         DesktopItemProps(
             iconResId = R.drawable.notepad_32x32,
             itemName = "Notepad",
-            onItemClicked = {},
         ),
     )
 }

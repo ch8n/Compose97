@@ -24,7 +24,15 @@ data class NavToolbarProp(
     @DrawableRes val iconRes: Int,
     val onOptionClicked: () -> Unit,
     val isExtra: Boolean = false,
-)
+) {
+    companion object {
+        val Empty = NavToolbarProp(
+            name = "Blank",
+            iconRes = R.drawable.ic_windows95,
+            onOptionClicked = {}
+        )
+    }
+}
 
 @Composable
 fun WindowNavToolbar(

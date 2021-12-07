@@ -23,7 +23,14 @@ import io.github.ch8n.compose97.ui.theme.White
 data class WindowAddressProps(
     @DrawableRes val iconRes: Int,
     val path: String,
-)
+) {
+    companion object {
+        val Empty = WindowAddressProps(
+            iconRes = R.drawable.ic_windows95,
+            path = "Blank"
+        )
+    }
+}
 
 @Composable
 fun WindowAddressBar(

@@ -22,20 +22,18 @@ import io.github.ch8n.compose97.ui.theme.White
 
 data class DesktopItemProps(
     val iconResId: Int,
-    val itemName: String,
-    val onItemClicked: () -> Unit
+    val itemName: String
 )
 
 @Composable
 fun DesktopItem(
     itemProps: DesktopItemProps,
     modifier: Modifier = Modifier,
+    onItemClicked: () -> Unit
 ) {
     Column(
         modifier = modifier
-            .clickable(
-                onClick = itemProps.onItemClicked
-            ),
+            .clickable(onClick = onItemClicked),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Icon(
@@ -66,9 +64,9 @@ fun DesktopItemPreview() {
             itemProps = DesktopItemProps(
                 iconResId = R.drawable.my_computer_32x32,
                 itemName = "My Computer",
-                onItemClicked = {
-                }
-            )
+            ),
+            onItemClicked = {
+            }
         )
     }
 }

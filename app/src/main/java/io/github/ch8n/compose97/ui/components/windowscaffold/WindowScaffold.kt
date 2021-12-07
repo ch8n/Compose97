@@ -20,23 +20,47 @@ data class WindowProps(
     val statusBar: StatusBarProps,
     val toolbar: List<ToolbarGroupProp>,
     val navToolbar: List<NavToolbarProp>,
-    val addressBar: WindowAddressProps
-)
+    val addressBar: WindowAddressProps,
+    val isMinimised: Boolean = false,
+    val isMaximised: Boolean = false,
+) {
+    companion object {
+        val NoWindow = WindowProps(
+            statusBar = StatusBarProps.Empty,
+            toolbar = listOf(ToolbarGroupProp.Empty),
+            navToolbar = listOf(NavToolbarProp.Empty),
+            addressBar = WindowAddressProps.Empty
+        )
+    }
+}
 
 @Composable
 fun WindowScaffold(
     props: WindowProps,
-    modifier: Modifier,
-    content: @Composable () -> Unit
+    modifier: Modifier = Modifier,
+    onMinimiseClicked: () -> Unit,
+    onMaximiseClicked: () -> Unit,
+    onCloseClicked: () -> Unit,
+    content: @Composable () -> Unit,
 ) {
+    if (props.isMinimised) {
+        return
+    }
+
     Column(
-        modifier = modifier.border(2.dp, Silver),
+        modifier = modifier
+            .fillMaxWidth(if (props.isMaximised) 1f else 0.75f)
+            .fillMaxHeight(if (props.isMaximised) 1f else 0.65f)
+            .border(2.dp, Silver),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         WindowStatusBar(
             props = props.statusBar,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            onMinimiseClicked = onMinimiseClicked,
+            onMaximiseClicked = onMaximiseClicked,
+            onCloseClicked = onCloseClicked
         )
 
         Divider(
@@ -98,9 +122,6 @@ fun WindowScaffoldPreview() {
             statusBar = StatusBarProps(
                 title = """C:\\""",
                 mainIcon = R.drawable.my_computer_32x32,
-                onCloseClicked = {},
-                onMaximiseClicked = {},
-                onMinimiseClicked = {},
             ),
             toolbar = listOf(
                 ToolbarGroupProp(
@@ -146,9 +167,11 @@ fun WindowScaffoldPreview() {
             addressBar = WindowAddressProps(
                 iconRes = R.drawable.my_computer_32x32,
                 path = """C:\\"""
-            )
+            ),
         ),
-        modifier = Modifier.fillMaxSize()
+        onMinimiseClicked = {},
+        onMaximiseClicked = {},
+        onCloseClicked = {}
     ) {
     }
 }

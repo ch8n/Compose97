@@ -50,7 +50,7 @@ fun Window97() {
         StartBar(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(55.dp),
+                .height(42.dp),
             props = StartBarProps(
                 tabs = emptyList(),
                 onStartButtonClicked = {

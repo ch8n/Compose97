@@ -17,7 +17,14 @@ import io.github.ch8n.compose97.ui.theme.Silver
 data class ToolbarGroupProp(
     val groupName: String,
     val onGroupClicked: () -> Unit,
-)
+) {
+    companion object {
+        val Empty = ToolbarGroupProp(
+            groupName = "Blank",
+            onGroupClicked = {}
+        )
+    }
+}
 
 @Preview
 @Composable
