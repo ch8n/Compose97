@@ -1,6 +1,7 @@
-// package io.github.ch8n.compose97.ui.components.recyclebin
+// package io.github.ch8n.compose97.ui.screens.mycomputer
 //
 // import androidx.annotation.DrawableRes
+// import androidx.compose.foundation.border
 // import androidx.compose.foundation.layout.*
 // import androidx.compose.foundation.lazy.LazyColumn
 // import androidx.compose.foundation.lazy.items
@@ -9,6 +10,7 @@
 // import androidx.compose.runtime.Composable
 // import androidx.compose.ui.Alignment
 // import androidx.compose.ui.Modifier
+// import androidx.compose.ui.draw.shadow
 // import androidx.compose.ui.graphics.Color
 // import androidx.compose.ui.res.painterResource
 // import androidx.compose.ui.tooling.preview.Preview
@@ -30,7 +32,7 @@
 // )
 //
 // @Composable
-// fun RecycleBin(
+// fun MyComputer(
 //    title: String,
 //    @DrawableRes icon: Int
 // ) {
@@ -78,9 +80,9 @@
 //
 // @Preview
 // @Composable
-// fun RecycleBinPreview() {
-//    RecycleBin(
-//        title = """RecycleBin""",
-//        icon = R.drawable.recycle_bin_32x32
+// fun MyComputerPreview() {
+//    MyComputer(
+//        title = """C:\\""",
+//        icon = R.drawable.my_computer_32x32
 //    )
 // }

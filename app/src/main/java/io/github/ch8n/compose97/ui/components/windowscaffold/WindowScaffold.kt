@@ -2,19 +2,25 @@ package io.github.ch8n.compose97.ui.components.windowscaffold
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.ch8n.compose97.R
-import io.github.ch8n.compose97.ui.theme.Black
-import io.github.ch8n.compose97.ui.theme.Gray
-import io.github.ch8n.compose97.ui.theme.Silver
-import io.github.ch8n.compose97.ui.theme.White
+import io.github.ch8n.compose97.ui.theme.*
 
 data class WindowProps(
     val statusBar: StatusBarProps,
@@ -109,7 +115,66 @@ fun WindowScaffold(
                 .border(1.dp, Black)
                 .shadow(2.dp)
         ) {
-            content()
+
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.linearGradient(
+                            0.15f to RoyalBlue,
+                            0.30f to White,
+                        )
+                    )
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 48.dp, start = 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(id = props.statusBar.mainIcon),
+                        modifier = Modifier
+                            .padding(start = 16.dp)
+                            .size(56.dp),
+                        contentDescription = null,
+                        tint = Color.Unspecified
+                    )
+
+                    Text(
+                        text = props.statusBar.title,
+                        style = MaterialTheme.typography.h2,
+                    )
+
+                    Box(
+                        modifier =
+                        Modifier
+                            .fillMaxWidth(0.8f)
+                            .height(2.5.dp)
+                            .background(
+                                Brush.horizontalGradient(
+                                    colors = listOf(
+                                        Color.Red,
+                                        Color.Yellow,
+                                        Color.Green,
+                                        Color.Blue
+                                    )
+                                )
+                            )
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .verticalScroll(state = rememberScrollState())
+                ) {
+                    content.invoke()
+                }
+            }
         }
     }
 }
@@ -166,12 +231,14 @@ fun WindowScaffoldPreview() {
             ),
             addressBar = WindowAddressProps(
                 iconRes = R.drawable.my_computer_32x32,
-                path = """C:\\"""
+                path = """C:\\""",
+                name = "C:"
             ),
+            isMaximised = true
         ),
         onMinimiseClicked = {},
         onMaximiseClicked = {},
-        onCloseClicked = {}
+        onCloseClicked = {},
     ) {
     }
 }

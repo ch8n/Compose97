@@ -40,7 +40,8 @@ fun Desktop(
                                 ),
                                 addressBar = WindowAddressProps(
                                     iconRes = desktopItem.iconResId,
-                                    path = desktopItem.itemName
+                                    path = "~/${desktopItem.itemName}",
+                                    name = desktopItem.itemName,
                                 ),
                                 isMinimised = false,
                                 isMaximised = false
@@ -83,27 +84,27 @@ fun DesktopPreview() {
                 iconResId = R.drawable.my_computer_32x32,
                 itemName = "My Computer",
 
-            ),
+                ),
             DesktopItemProps(
                 iconResId = R.drawable.recycle_bin_32x32,
                 itemName = "Recycle Bin",
 
-            ),
+                ),
             DesktopItemProps(
                 iconResId = R.drawable.my_documents_folder_32x32,
                 itemName = "My Documents",
 
-            ),
+                ),
             DesktopItemProps(
                 iconResId = R.drawable.internet_explorer_32x32,
                 itemName = "Internet\nExplorer",
 
-            ),
+                ),
             DesktopItemProps(
                 iconResId = R.drawable.notepad_32x32,
                 itemName = "Notepad",
 
-            ),
+                ),
         )
     )
 }

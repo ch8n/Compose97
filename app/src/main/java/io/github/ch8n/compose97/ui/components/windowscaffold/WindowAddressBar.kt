@@ -23,11 +23,13 @@ import io.github.ch8n.compose97.ui.theme.White
 data class WindowAddressProps(
     @DrawableRes val iconRes: Int,
     val path: String,
+    val name: String,
 ) {
     companion object {
         val Empty = WindowAddressProps(
             iconRes = R.drawable.ic_windows95,
-            path = "Blank"
+            path = "~/",
+            name = "Blank"
         )
     }
 }
@@ -55,7 +57,8 @@ fun WindowAddressBar(
                 .fillMaxWidth()
                 .border(1.dp, Black)
                 .shadow(2.dp)
-                .background(White),
+                .background(White)
+                .padding(4.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
@@ -82,7 +85,8 @@ fun WindowAddressBarPreview() {
         WindowAddressBar(
             props = WindowAddressProps(
                 iconRes = R.drawable.my_computer_32x32,
-                path = """C://"""
+                path = """C://""",
+                name = "C:"
             ),
             modifier = Modifier.fillMaxWidth()
         )
