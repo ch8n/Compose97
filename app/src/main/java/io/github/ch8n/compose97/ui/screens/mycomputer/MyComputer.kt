@@ -20,11 +20,13 @@ import io.github.ch8n.compose97.ui.components.windowscaffold.StatusBarProps
 import io.github.ch8n.compose97.ui.components.windowscaffold.WindowAddressProps
 import io.github.ch8n.compose97.ui.components.windowscaffold.WindowProps
 import io.github.ch8n.compose97.ui.components.windowscaffold.WindowScaffold
+import java.util.*
 
 
 // TODO folders and search
 
 data class Note(
+    val id: String,
     val name: String,
     val content: String,
     val updatedAt: Long,
@@ -33,6 +35,7 @@ data class Note(
     companion object {
         val SAMPLE
             get() = Note(
+                id = UUID.randomUUID().toString(),
                 name = "file",
                 content = LoremIpsum().values.take(5).toString(),
                 updatedAt = System.currentTimeMillis(),
@@ -52,7 +55,6 @@ val sampleNotes = mutableListOf<Note>().apply {
         add(Note.SAMPLE.copy(name = "File ${it + 1}"))
     }
 }
-
 
 @Composable
 fun MyComputer(
