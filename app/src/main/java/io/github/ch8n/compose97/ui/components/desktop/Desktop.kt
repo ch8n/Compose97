@@ -67,6 +67,7 @@ fun Desktop(
                 },
                 onCloseClicked = { setWindowOpen(false) }
             ) {
+                
             }
         }
     }

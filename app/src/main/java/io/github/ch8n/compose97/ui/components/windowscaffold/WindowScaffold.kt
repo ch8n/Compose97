@@ -167,13 +167,7 @@ fun WindowScaffold(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .verticalScroll(state = rememberScrollState())
-                ) {
-                    content.invoke()
-                }
+                content.invoke()
             }
         }
     }
