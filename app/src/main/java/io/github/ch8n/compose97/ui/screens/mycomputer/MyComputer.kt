@@ -1,8 +1,9 @@
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -16,15 +17,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import io.github.ch8n.compose97.R
-import io.github.ch8n.compose97.ui.components.windowscaffold.StatusBarProps
-import io.github.ch8n.compose97.ui.components.windowscaffold.WindowAddressProps
-import io.github.ch8n.compose97.ui.components.windowscaffold.WindowProps
-import io.github.ch8n.compose97.ui.components.windowscaffold.WindowScaffold
+import io.github.ch8n.compose97.ui.components.windowscaffold.*
+import io.github.ch8n.compose97.ui.screens.folder.FolderWindowContent
 import java.util.*
 
 
 // TODO folders and search
-
 data class Note(
     val id: String,
     val name: String,
@@ -84,6 +82,21 @@ fun MyComputer(
         onMaximiseClicked = onMaximiseClicked,
         onCloseClicked = onCloseClicked
     ) {
+
+        Column() {
+
+            sampleNotes.groupBy { it.group }.forEach { (folderName, files) ->
+                FolderWindowContent(
+                    files = files,
+                    onFileClicked = {
+
+                    },
+                )
+            }
+        }
+
+
+
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
             state = rememberLazyListState(),
@@ -91,24 +104,12 @@ fun MyComputer(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            sampleNotes.groupBy { it.group }.forEach { (key, value) ->
-                item {
-                    Text(text = key)
-                }
-
-                items(value.chunked(4)) { set4Notes ->
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        set4Notes.forEach { Icon(note = it) }
-                    }
-                }
+            sampleNotes.groupBy { it.group }.forEach { (folderName, files) ->
 
                 item {
-                    Divider()
+
                 }
+
             }
         }
     }

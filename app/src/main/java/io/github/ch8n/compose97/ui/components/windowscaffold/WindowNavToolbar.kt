@@ -3,12 +3,15 @@ package io.github.ch8n.compose97.ui.components.windowscaffold
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import io.github.ch8n.compose97.R
 import io.github.ch8n.compose97.ui.theme.Gray
 import io.github.ch8n.compose97.ui.theme.Silver
+import kotlinx.coroutines.delay
 
 data class NavToolbarProp(
     val name: String,
@@ -39,10 +43,20 @@ fun WindowNavToolbar(
     modifier: Modifier,
     toolbarOptions: List<NavToolbarProp>
 ) {
+
+    val state = rememberScrollState()
+
+    LaunchedEffect(key1 = Unit) {
+        delay(1000)
+        state.animateScrollTo(100)
+        state.animateScrollTo(0)
+    }
+
     Row(
         modifier = modifier
             .background(Silver)
-            .padding(horizontal = 8.dp, vertical = 4.dp),
+            .padding(horizontal = 8.dp, vertical = 4.dp)
+            .horizontalScroll(state = state),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
