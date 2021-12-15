@@ -83,18 +83,9 @@ fun MyComputer(
         onCloseClicked = onCloseClicked
     ) {
 
-        Column() {
+        sampleNotes.groupBy { it.group }.forEach { (folderName, files) ->
 
-            sampleNotes.groupBy { it.group }.forEach { (folderName, files) ->
-                FolderWindowContent(
-                    files = files,
-                    onFileClicked = {
-
-                    },
-                )
-            }
         }
-
 
 
         LazyColumn(
