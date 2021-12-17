@@ -1,4 +1,4 @@
-package io.github.ch8n.compose97.ui.components.desktop
+package io.github.ch8n.compose97.routes.desktop
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

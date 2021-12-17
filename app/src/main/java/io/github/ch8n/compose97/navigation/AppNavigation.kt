@@ -4,72 +4,66 @@ import androidx.compose.runtime.Composable
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.Router
 import com.arkivanov.decompose.router.router
-import com.arkivanov.essenty.parcelable.Parcelable
-import com.arkivanov.essenty.parcelable.Parcelize
+import io.github.ch8n.compose97.routes.desktop.DesktopComponent
+import io.github.ch8n.compose97.routes.window97.Window97AppComponent
 
-abstract class DecomposeComponent(
-    private val componentContext: ComponentContext
-) : ComponentContext by componentContext {
+abstract class NavigationComponent(
+    componentContext: ComponentContext
+) : DecomposeComponent(componentContext) {
+
+    abstract val router: Router<Destinations, DecomposeComponent>
+
+    private val window97 = Window97AppComponent(
+        componentContext = this,
+        router = router
+    )
 
     @Composable
-    abstract fun render()
+    override fun render() {
+        window97.render()
+    }
+
 }
 
 
-class NavigationComponent(componentContext: ComponentContext) :
-    DecomposeComponent(componentContext) {
+class AppNavigation(componentContext: ComponentContext) : NavigationComponent(componentContext) {
 
-
-    private sealed class Destinations : Parcelable
-
-    @Parcelize
-    private object Desktop : Destinations()
-
-    @Parcelize
-    private object MyComputer : Destinations()
-
-    @Parcelize
-    private object MyDocuments : Destinations()
-
-    @Parcelize
-    private object RecyclerBin : Destinations()
-
-    @Parcelize
-    private object InternetExplorer : Destinations()
-
-    @Parcelize
-    private object Notepad : Destinations()
-
-    @Parcelize
-    private data class Folder(val groupId: String) : Destinations()
-
-    private val router: Router<Destinations, DecomposeComponent> = router(
-        initialConfiguration = Desktop,
-        initialBackStack = emptyList(),
-        key = "RootRouter",
-        handleBackButton = false,
-        childFactory = ::createDestinations
-    )
+    override val router: Router<Destinations, DecomposeComponent>
+        get() = router(
+            initialConfiguration = Destinations.Desktop,
+            initialBackStack = emptyList(),
+            key = "RootRouter",
+            handleBackButton = false,
+            childFactory = ::createDestinations
+        )
 
     private fun createDestinations(
         destinations: Destinations,
         context: ComponentContext
     ): DecomposeComponent {
         return when (destinations) {
-            is Desktop -> TODO()
-            is Folder -> TODO()
-            is InternetExplorer -> TODO()
-            is MyComputer -> TODO()
-            is MyDocuments -> TODO()
-            is Notepad -> TODO()
-            is RecyclerBin -> TODO()
+            is Destinations.Desktop -> DesktopComponent(context)
+            is Destinations.Folder -> TODO()
+            is Destinations.InternetExplorer -> TODO()
+            is Destinations.MyComputer -> TODO()
+            is Destinations.MyDocuments -> TODO()
+            is Destinations.Notepad -> TODO()
+            is Destinations.RecyclerBin -> TODO()
         }
     }
 
-    @Composable
-    override fun render() {
+    companion object {
+        fun previewComponent(componentContext: ComponentContext): NavigationComponent {
+            return object : NavigationComponent(componentContext) {
+                override val router: Router<Destinations, DecomposeComponent>
+                    get() = router(
+                        initialConfiguration = Destinations.Desktop,
+                        childFactory = { _, context ->
+                            DesktopComponent(context)
+                        }
+                    )
+            }
+        }
 
     }
-
-
 }

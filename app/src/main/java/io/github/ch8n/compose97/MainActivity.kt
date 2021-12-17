@@ -3,10 +3,9 @@ package io.github.ch8n.compose97
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import io.github.ch8n.compose97.ui.components.Preview
-import io.github.ch8n.compose97.ui.screens.Window97
+import com.arkivanov.decompose.defaultComponentContext
+import io.github.ch8n.compose97.navigation.AppNavigation
+import io.github.ch8n.compose97.navigation.NavigationComponent
 import io.github.ch8n.compose97.ui.theme.Compose97Theme
 
 class MainActivity : ComponentActivity() {
@@ -16,18 +15,12 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun compose97App() {
+        val rootNavigationComponent = AppNavigation(defaultComponentContext())
         setContent {
             Compose97Theme {
-                Window97()
+                rootNavigationComponent.render()
             }
         }
     }
 }
 
-@Preview
-@Composable
-fun Window97Preview() {
-    Preview {
-        Window97()
-    }
-}

@@ -1,7 +1,7 @@
 package io.github.ch8n.compose97.ui.screens
 
 import io.github.ch8n.compose97.R
-import io.github.ch8n.compose97.ui.components.desktop.DesktopItemProps
+import io.github.ch8n.compose97.routes.desktop.DesktopItemProps
 import io.github.ch8n.compose97.ui.components.startMenu.StartMenuItemProps
 
 class WindowsVM {

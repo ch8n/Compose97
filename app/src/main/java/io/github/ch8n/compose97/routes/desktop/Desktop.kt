@@ -1,4 +1,4 @@
-package io.github.ch8n.compose97.ui.components.desktop
+package io.github.ch8n.compose97.routes.desktop
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
@@ -8,11 +8,53 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.arkivanov.decompose.ComponentContext
 import io.github.ch8n.compose97.R
+import io.github.ch8n.compose97.navigation.DecomposeComponent
 import io.github.ch8n.compose97.ui.components.windowscaffold.StatusBarProps
 import io.github.ch8n.compose97.ui.components.windowscaffold.WindowAddressProps
 import io.github.ch8n.compose97.ui.components.windowscaffold.WindowProps
 import io.github.ch8n.compose97.ui.components.windowscaffold.WindowScaffold
+
+
+class DesktopComponent(
+    componentContext: ComponentContext,
+) : DecomposeComponent(componentContext) {
+
+    private val desktopItems = listOf(
+        DesktopItemProps(
+            iconResId = R.drawable.my_computer_32x32,
+            itemName = "My Computer",
+        ),
+        DesktopItemProps(
+            iconResId = R.drawable.recycle_bin_32x32,
+            itemName = "Recycle Bin",
+        ),
+        DesktopItemProps(
+            iconResId = R.drawable.my_documents_folder_32x32,
+            itemName = "My Documents",
+        ),
+        DesktopItemProps(
+            iconResId = R.drawable.internet_explorer_32x32,
+            itemName = "Internet\nExplorer",
+        ),
+        DesktopItemProps(
+            iconResId = R.drawable.notepad_32x32,
+            itemName = "Notepad",
+        ),
+    )
+
+    @Composable
+    override fun render() {
+        Desktop(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(),
+            desktopItemItems = desktopItems
+        )
+    }
+}
+
 
 @Composable
 fun Desktop(
@@ -67,7 +109,7 @@ fun Desktop(
                 },
                 onCloseClicked = { setWindowOpen(false) }
             ) {
-                
+
             }
         }
     }
