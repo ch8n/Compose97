@@ -1,41 +1,25 @@
 package io.github.ch8n.compose97.navigation
 
-import androidx.compose.runtime.Composable
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.Router
 import com.arkivanov.decompose.router.router
 import io.github.ch8n.compose97.routes.desktop.DesktopComponent
-import io.github.ch8n.compose97.routes.window97.Window97AppComponent
 
 abstract class NavigationComponent(
-    componentContext: ComponentContext
+    componentContext: ComponentContext,
 ) : DecomposeComponent(componentContext) {
 
     abstract val router: Router<Destinations, DecomposeComponent>
-
-    private val window97 = Window97AppComponent(
-        componentContext = this,
-        router = router
-    )
-
-    @Composable
-    override fun render() {
-        window97.render()
-    }
 
 }
 
 
 class AppNavigation(componentContext: ComponentContext) : NavigationComponent(componentContext) {
 
-    override val router: Router<Destinations, DecomposeComponent>
-        get() = router(
-            initialConfiguration = Destinations.Desktop,
-            initialBackStack = emptyList(),
-            key = "RootRouter",
-            handleBackButton = false,
-            childFactory = ::createDestinations
-        )
+    override val router: Router<Destinations, DecomposeComponent> = router(
+        initialConfiguration = Destinations.Desktop,
+        childFactory = ::createDestinations
+    )
 
     private fun createDestinations(
         destinations: Destinations,
@@ -59,11 +43,13 @@ class AppNavigation(componentContext: ComponentContext) : NavigationComponent(co
                     get() = router(
                         initialConfiguration = Destinations.Desktop,
                         childFactory = { _, context ->
-                            DesktopComponent(context)
+                            TODO()
                         }
                     )
             }
         }
 
     }
+
+
 }

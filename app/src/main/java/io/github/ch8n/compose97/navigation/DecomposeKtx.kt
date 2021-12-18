@@ -5,8 +5,4 @@ import com.arkivanov.decompose.ComponentContext
 
 abstract class DecomposeComponent(
     private val componentContext: ComponentContext
-) : ComponentContext by componentContext {
-
-    @Composable
-    abstract fun render()
-}
+) : ComponentContext by componentContext
