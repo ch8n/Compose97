@@ -29,11 +29,13 @@ data class DesktopItemProps(
 fun DesktopItem(
     itemProps: DesktopItemProps,
     modifier: Modifier = Modifier,
-    onItemClicked: () -> Unit
+    onItemClicked: (itemProps: DesktopItemProps) -> Unit
 ) {
     Column(
         modifier = modifier
-            .clickable(onClick = onItemClicked),
+            .clickable {
+                onItemClicked.invoke(itemProps)
+            },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Icon(
