@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
     private fun compose97App() {
         val componentContext = defaultComponentContext()
         val rootNavComponent: NavigationComponent = AppNavigation(componentContext)
-        val window97Component: Window97AppComponent = Window97AppComponent(componentContext)
+        val window97Component = Window97AppComponent(componentContext)
         setContent {
             Compose97Theme {
                 Window97(

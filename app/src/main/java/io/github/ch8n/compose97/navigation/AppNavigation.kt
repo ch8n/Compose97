@@ -4,6 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.Router
 import com.arkivanov.decompose.router.router
 import io.github.ch8n.compose97.routes.desktop.DesktopComponent
+import io.github.ch8n.compose97.routes.mycomputer.MyComputerComponent
 
 abstract class NavigationComponent(
     componentContext: ComponentContext,
@@ -29,7 +30,7 @@ class AppNavigation(componentContext: ComponentContext) : NavigationComponent(co
             is Destinations.Desktop -> DesktopComponent(context)
             is Destinations.Folder -> TODO()
             is Destinations.InternetExplorer -> TODO()
-            is Destinations.MyComputer -> TODO()
+            is Destinations.MyComputer -> MyComputerComponent(context)
             is Destinations.MyDocuments -> TODO()
             is Destinations.Notepad -> TODO()
             is Destinations.RecyclerBin -> TODO()

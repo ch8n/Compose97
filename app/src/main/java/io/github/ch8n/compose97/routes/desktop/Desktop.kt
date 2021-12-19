@@ -9,57 +9,50 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.ComponentContext
-import io.github.ch8n.compose97.R
+import com.arkivanov.decompose.router.push
 import io.github.ch8n.compose97.navigation.DecomposeComponent
+import io.github.ch8n.compose97.navigation.Destinations
+import io.github.ch8n.compose97.navigation.NavigationComponent
+import io.github.ch8n.compose97.routes.window97.Window97Common
 
 
 class DesktopComponent(
-    componentContext: ComponentContext,
+    componentContext: ComponentContext
 ) : DecomposeComponent(componentContext) {
 
-    val desktopItems = listOf(
-        DesktopItemProps(
-            iconResId = R.drawable.my_computer_32x32,
-            itemName = "My Computer",
-        ),
-        DesktopItemProps(
-            iconResId = R.drawable.recycle_bin_32x32,
-            itemName = "Recycle Bin",
-        ),
-        DesktopItemProps(
-            iconResId = R.drawable.my_documents_folder_32x32,
-            itemName = "My Documents",
-        ),
-        DesktopItemProps(
-            iconResId = R.drawable.internet_explorer_32x32,
-            itemName = "Internet\nExplorer",
-        ),
-        DesktopItemProps(
-            iconResId = R.drawable.notepad_32x32,
-            itemName = "Notepad",
-        ),
+    val desktopItems = listOf<Window97Common>(
+        Window97Common.MyComputer,
+        Window97Common.RecyclerBin,
+        Window97Common.MyComputer,
+        Window97Common.InternetExplorer,
+        Window97Common.Notepad
     )
 
-    fun onDesktopItemClicked(desktopItem: DesktopItemProps) {
-        // do stuff
-    }
 }
 
 @Composable
 fun Desktop(
     modifier: Modifier,
-    desktopComponent: DesktopComponent
+    desktopComponent: DesktopComponent,
+    navComponent: NavigationComponent,
 ) {
     Box(modifier = modifier) {
-
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             desktopComponent.desktopItems.forEach { desktopItem ->
                 Spacer(modifier = Modifier.size(12.dp))
                 DesktopItem(
-                    itemProps = desktopItem,
-                    onItemClicked = desktopComponent::onDesktopItemClicked
+                    window97Common = desktopItem,
+                    onItemClicked = { window97Common ->
+                        when (window97Common) {
+                            Window97Common.InternetExplorer -> TODO()
+                            Window97Common.MyComputer -> navComponent.router.push(Destinations.MyComputer)
+                            Window97Common.MyDocuments -> TODO()
+                            Window97Common.Notepad -> TODO()
+                            Window97Common.RecyclerBin -> TODO()
+                        }
+                    }
                 )
             }
         }

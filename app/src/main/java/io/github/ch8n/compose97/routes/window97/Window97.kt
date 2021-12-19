@@ -15,12 +15,25 @@ import io.github.ch8n.compose97.navigation.DecomposeComponent
 import io.github.ch8n.compose97.navigation.NavigationComponent
 import io.github.ch8n.compose97.routes.desktop.Desktop
 import io.github.ch8n.compose97.routes.desktop.DesktopComponent
+import io.github.ch8n.compose97.routes.mycomputer.MyComputer
+import io.github.ch8n.compose97.routes.mycomputer.MyComputerComponent
 import io.github.ch8n.compose97.ui.components.startBar.StartBar
 import io.github.ch8n.compose97.ui.components.startBar.StartBarProps
 import io.github.ch8n.compose97.ui.components.startBar.StartTabProps
 import io.github.ch8n.compose97.ui.components.startMenu.StartMenu
 import io.github.ch8n.compose97.ui.components.startMenu.StartMenuItemProps
 import io.github.ch8n.compose97.ui.theme.Teal
+
+
+sealed class Window97Common(val label: String, val iconId: Int) {
+    object MyComputer : Window97Common("My Computer", R.drawable.my_computer_32x32)
+    object RecyclerBin : Window97Common("Recycle Bin", R.drawable.recycle_bin_32x32)
+    object MyDocuments : Window97Common("My Documents", R.drawable.my_documents_folder_32x32)
+    object InternetExplorer :
+        Window97Common("Internet Explorer", R.drawable.internet_explorer_32x32)
+
+    object Notepad : Window97Common("Notepad", R.drawable.notepad_32x32)
+}
 
 class Window97AppComponent(
     componentContext: ComponentContext,
@@ -83,7 +96,12 @@ fun Window97(
                         modifier = Modifier
                             .fillMaxWidth()
                             .fillMaxHeight(),
-                        desktopComponent = component
+                        desktopComponent = component,
+                        navComponent = navComponent
+                    )
+                    is MyComputerComponent -> MyComputer(
+                        myComputerComponent = component,
+                        navComponent = navComponent
                     )
                 }
             }
