@@ -23,7 +23,7 @@ class DesktopComponent(
     val desktopItems = listOf<Window97Common>(
         Window97Common.MyComputer,
         Window97Common.RecyclerBin,
-        Window97Common.MyComputer,
+        Window97Common.MyDocuments,
         Window97Common.InternetExplorer,
         Window97Common.Notepad
     )
@@ -50,7 +50,7 @@ fun Desktop(
                             Window97Common.MyComputer -> navComponent.router.push(Destinations.MyComputer)
                             Window97Common.MyDocuments -> TODO()
                             Window97Common.Notepad -> TODO()
-                            Window97Common.RecyclerBin -> TODO()
+                            Window97Common.RecyclerBin -> navComponent.router.push(Destinations.RecyclerBin)
                         }
                     }
                 )

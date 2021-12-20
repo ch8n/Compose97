@@ -17,6 +17,8 @@ import io.github.ch8n.compose97.routes.desktop.Desktop
 import io.github.ch8n.compose97.routes.desktop.DesktopComponent
 import io.github.ch8n.compose97.routes.mycomputer.MyComputer
 import io.github.ch8n.compose97.routes.mycomputer.MyComputerComponent
+import io.github.ch8n.compose97.routes.recyclebin.RecycleBin
+import io.github.ch8n.compose97.routes.recyclebin.RecycleBinComponent
 import io.github.ch8n.compose97.ui.components.startBar.StartBar
 import io.github.ch8n.compose97.ui.components.startBar.StartBarProps
 import io.github.ch8n.compose97.ui.components.startBar.StartTabProps
@@ -101,6 +103,10 @@ fun Window97(
                     )
                     is MyComputerComponent -> MyComputer(
                         myComputerComponent = component,
+                        navComponent = navComponent
+                    )
+                    is RecycleBinComponent -> RecycleBin(
+                        recycleBinComponent = component,
                         navComponent = navComponent
                     )
                 }
