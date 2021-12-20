@@ -2,10 +2,7 @@ package io.github.ch8n.compose97.ui.components.windowscaffold
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -115,7 +112,6 @@ fun WindowScaffold(
                 .border(1.dp, Black)
                 .shadow(2.dp)
         ) {
-
 
             Column(
                 modifier = Modifier

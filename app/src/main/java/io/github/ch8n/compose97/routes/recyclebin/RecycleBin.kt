@@ -58,18 +58,14 @@ class RecycleBinComponent(
         }
     }
 
-
     fun onMinimiseClicked() {}
     fun onMaximiseClicked() {}
     fun onCloseClicked() {}
     fun onRestore(folderOrFileName: String) {
-
     }
 
     fun onPermanentDelete(folderOrFileName: String) {
-
     }
-
 }
 
 @Composable
@@ -109,7 +105,6 @@ fun RecycleBin(
                 },
                 text = {
                     Column() {
-
                     }
                 },
                 buttons = {
@@ -194,7 +189,3 @@ private fun FolderItem(
         )
     }
 }
-
-
-
-

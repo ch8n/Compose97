@@ -1,4 +1,4 @@
-package io.github.ch8n.compose97.routes.mycomputer
+package io.github.ch8n.compose97.routes.mydocuments
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -18,24 +18,33 @@ import com.arkivanov.decompose.ComponentContext
 import io.github.ch8n.compose97.R
 import io.github.ch8n.compose97.navigation.DecomposeComponent
 import io.github.ch8n.compose97.navigation.NavigationComponent
+import io.github.ch8n.compose97.routes.window97.Window97Common
 import io.github.ch8n.compose97.ui.components.windowscaffold.StatusBarProps
 import io.github.ch8n.compose97.ui.components.windowscaffold.WindowAddressProps
 import io.github.ch8n.compose97.ui.components.windowscaffold.WindowProps
 import io.github.ch8n.compose97.ui.components.windowscaffold.WindowScaffold
 
-class MyComputerComponent(
+class MyDocumentComponent(
     componentContext: ComponentContext,
 ) : DecomposeComponent(componentContext) {
 
+    val myDocument = Window97Common.MyDocuments
+
     val statusBar = StatusBarProps(
-        title = "(C:)",
-        mainIcon = R.drawable.drive_32x32
+        title = myDocument.label,
+        mainIcon = myDocument.iconId
     )
 
-    fun getFolders(): List<String> {
+    val windowProps = WindowAddressProps(
+        iconRes = myDocument.iconId,
+        name = myDocument.label,
+        path = "~${myDocument.label.capitalize()}://"
+    )
+
+    fun recentDocuments(): MutableList<String> {
         return mutableListOf<String>().apply {
             repeat(10) {
-                add("folder${it + 1}")
+                add("document${it + 1}")
             }
         }
     }
@@ -43,49 +52,51 @@ class MyComputerComponent(
     fun onMinimiseClicked() {}
     fun onMaximiseClicked() {}
     fun onCloseClicked() {}
-    fun onFolderClicked(folder: String) {
+
+    fun onDocumentClicked(document: String) {
     }
 }
 
 @Composable
-fun MyComputer(
-    myComputerComponent: MyComputerComponent,
+fun MyDocument(
+    myDocumentComponent: MyDocumentComponent,
     navComponent: NavigationComponent,
 ) {
-    val myComputerProps = remember {
+    val recycleBinWindowProps = remember {
         WindowProps(
-            statusBar = myComputerComponent.statusBar,
+            statusBar = myDocumentComponent.statusBar,
             toolbar = emptyList(),
             navToolbar = emptyList(),
-            addressBar = WindowAddressProps(
-                iconRes = R.drawable.drive_32x32,
-                name = "(C:)",
-                path = "C://"
-            ),
+            addressBar = myDocumentComponent.windowProps,
             isMaximised = true
         )
     }
+
     WindowScaffold(
-        props = myComputerProps,
-        onMinimiseClicked = myComputerComponent::onMinimiseClicked,
-        onMaximiseClicked = myComputerComponent::onMaximiseClicked,
-        onCloseClicked = myComputerComponent::onCloseClicked
+        props = recycleBinWindowProps,
+        onMinimiseClicked = myDocumentComponent::onMinimiseClicked,
+        onMaximiseClicked = myDocumentComponent::onMaximiseClicked,
+        onCloseClicked = myDocumentComponent::onCloseClicked
     ) {
+
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
             state = rememberLazyListState(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            items(myComputerComponent.getFolders().chunked(4)) { folders ->
+            items(myDocumentComponent.recentDocuments().chunked(4)) { folders ->
                 Row(
-                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     folders.forEach { folder ->
+
                         FolderItem(
-                            folderName = folder,
-                            onFolderClicked = myComputerComponent::onFolderClicked
+                            fileName = folder,
+                            onFolderClicked = myDocumentComponent::onDocumentClicked
                         )
                     }
                 }
@@ -96,25 +107,25 @@ fun MyComputer(
 
 @Composable
 private fun FolderItem(
-    folderName: String,
+    fileName: String,
     onFolderClicked: (folderName: String) -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(2.dp),
         modifier = Modifier.clickable {
-            onFolderClicked.invoke(folderName)
+            onFolderClicked.invoke(fileName)
         }
     ) {
         androidx.compose.material.Icon(
-            painter = painterResource(id = R.drawable.folder_32x32),
+            painter = painterResource(id = R.drawable.notepad_file_32x32),
             modifier = Modifier.size(24.dp),
             contentDescription = null,
             tint = Color.Unspecified
         )
 
         Text(
-            text = folderName,
+            text = fileName,
             style = MaterialTheme.typography.caption,
         )
     }

@@ -1,6 +1,5 @@
 package io.github.ch8n.compose97.ui.screens.folder
 
-import Note
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,18 +9,36 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import io.github.ch8n.compose97.R
-import io.github.ch8n.compose97.ui.components.windowscaffold.*
-import sampleNotes
+import io.github.ch8n.compose97.ui.components.windowscaffold.WindowProps
+import io.github.ch8n.compose97.ui.components.windowscaffold.WindowScaffold
 import java.util.*
+
+data class Note(
+    val id: String,
+    val name: String,
+    val content: String,
+    val updatedAt: Long,
+    val group: String,
+) {
+    companion object {
+        val SAMPLE
+            get() = Note(
+                id = UUID.randomUUID().toString(),
+                name = "file",
+                content = LoremIpsum().values.take(5).toString(),
+                updatedAt = System.currentTimeMillis(),
+                group = "abc".random().toString()
+            )
+    }
+}
 
 sealed class FolderWindowEvent {
     object OnMinimized : FolderWindowEvent()
@@ -32,7 +49,6 @@ sealed class FolderWindowEvent {
     data class OnOpenNote(val note: Note) : FolderWindowEvent()
     data class OnDeleteNote(val notes: List<Note>) : FolderWindowEvent()
 }
-
 
 @Composable
 fun FolderWindow(
@@ -114,93 +130,6 @@ private fun NotePadIcon(
             maxLines = 4,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.widthIn(max = 64.dp)
-        )
-    }
-}
-
-
-@Preview
-@Composable
-fun FolderPreview() {
-    io.github.ch8n.compose97.ui.components.Preview {
-        val folderWindowProps = remember {
-            WindowProps(
-                statusBar = StatusBarProps(
-                    title = "Chetan",
-                    mainIcon = R.drawable.folder_32x32
-                ),
-                toolbar = emptyList(),
-                navToolbar = listOf(
-                    NavToolbarProp(
-                        name = "Back",
-                        iconRes = R.drawable.ic_back_navtool,
-                        onOptionClicked = {}
-                    ),
-                    NavToolbarProp(
-                        name = "Forward",
-                        iconRes = R.drawable.ic_forward_navtool,
-                        onOptionClicked = {}
-                    ),
-                    NavToolbarProp(
-                        name = "Up",
-                        iconRes = R.drawable.ic_up_navtool,
-                        onOptionClicked = {}
-                    ),
-                ) + listOf(
-                    NavToolbarProp(
-                        isExtra = true,
-                        name = "Create",
-                        iconRes = R.drawable.ic_new_note_nav,
-                        onOptionClicked = {
-                            //  onEvent.invoke(FolderWindowEvent.OnNewNote)
-                        }
-                    ),
-                    NavToolbarProp(
-                        isExtra = true,
-                        name = "Delete",
-                        iconRes = R.drawable.ic_delete_navtool,
-                        onOptionClicked = {
-                            val notes = listOf<Note>()
-                            // onEvent.invoke(FolderWindowEvent.OnDeleteNote(notes))
-                        }
-                    ),
-                    NavToolbarProp(
-                        isExtra = true,
-                        name = "Search",
-                        iconRes = R.drawable.ic_search,
-                        onOptionClicked = {
-                            // onEvent.invoke(FolderWindowEvent.OnSearch)
-                        }
-                    ),
-                ),
-                addressBar = WindowAddressProps(
-                    iconRes = R.drawable.folder_32x32,
-                    name = "Chetan",
-                    path = "C://Chetan"
-                ),
-                isMaximised = true
-            )
-        }
-
-        FolderWindow(
-            folderProps = folderWindowProps,
-            files = sampleNotes
-                .groupBy { it.group }
-                .values
-                .toList()
-                .first()
-                .map { it.copy(name = UUID.randomUUID().toString()) },
-            onEvent = { event ->
-                when (event) {
-                    FolderWindowEvent.OnClosed -> {}
-                    is FolderWindowEvent.OnDeleteNote -> {}
-                    FolderWindowEvent.OnMaximized -> {}
-                    FolderWindowEvent.OnMinimized -> {}
-                    FolderWindowEvent.OnNewNote -> {}
-                    is FolderWindowEvent.OnOpenNote -> {}
-                    FolderWindowEvent.OnSearch -> {}
-                }
-            }
         )
     }
 }

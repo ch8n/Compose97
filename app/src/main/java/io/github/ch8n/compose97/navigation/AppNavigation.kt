@@ -5,6 +5,7 @@ import com.arkivanov.decompose.router.Router
 import com.arkivanov.decompose.router.router
 import io.github.ch8n.compose97.routes.desktop.DesktopComponent
 import io.github.ch8n.compose97.routes.mycomputer.MyComputerComponent
+import io.github.ch8n.compose97.routes.mydocuments.MyDocumentComponent
 import io.github.ch8n.compose97.routes.recyclebin.RecycleBinComponent
 
 abstract class NavigationComponent(
@@ -12,9 +13,7 @@ abstract class NavigationComponent(
 ) : DecomposeComponent(componentContext) {
 
     abstract val router: Router<Destinations, DecomposeComponent>
-
 }
-
 
 class AppNavigation(componentContext: ComponentContext) : NavigationComponent(componentContext) {
 
@@ -32,7 +31,7 @@ class AppNavigation(componentContext: ComponentContext) : NavigationComponent(co
             is Destinations.Folder -> TODO()
             is Destinations.InternetExplorer -> TODO()
             is Destinations.MyComputer -> MyComputerComponent(context)
-            is Destinations.MyDocuments -> TODO()
+            is Destinations.MyDocuments -> MyDocumentComponent(context)
             is Destinations.Notepad -> TODO()
             is Destinations.RecyclerBin -> RecycleBinComponent(context)
         }
@@ -50,8 +49,5 @@ class AppNavigation(componentContext: ComponentContext) : NavigationComponent(co
                     )
             }
         }
-
     }
-
-
 }

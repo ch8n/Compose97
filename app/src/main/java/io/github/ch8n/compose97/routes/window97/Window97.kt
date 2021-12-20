@@ -17,6 +17,8 @@ import io.github.ch8n.compose97.routes.desktop.Desktop
 import io.github.ch8n.compose97.routes.desktop.DesktopComponent
 import io.github.ch8n.compose97.routes.mycomputer.MyComputer
 import io.github.ch8n.compose97.routes.mycomputer.MyComputerComponent
+import io.github.ch8n.compose97.routes.mydocuments.MyDocument
+import io.github.ch8n.compose97.routes.mydocuments.MyDocumentComponent
 import io.github.ch8n.compose97.routes.recyclebin.RecycleBin
 import io.github.ch8n.compose97.routes.recyclebin.RecycleBinComponent
 import io.github.ch8n.compose97.ui.components.startBar.StartBar
@@ -25,7 +27,6 @@ import io.github.ch8n.compose97.ui.components.startBar.StartTabProps
 import io.github.ch8n.compose97.ui.components.startMenu.StartMenu
 import io.github.ch8n.compose97.ui.components.startMenu.StartMenuItemProps
 import io.github.ch8n.compose97.ui.theme.Teal
-
 
 sealed class Window97Common(val label: String, val iconId: Int) {
     object MyComputer : Window97Common("My Computer", R.drawable.my_computer_32x32)
@@ -72,7 +73,6 @@ class Window97AppComponent(
     val starBarTabs = listOf<StartTabProps>()
 }
 
-
 @Composable
 fun Window97(
     navComponent: NavigationComponent,
@@ -109,6 +109,10 @@ fun Window97(
                         recycleBinComponent = component,
                         navComponent = navComponent
                     )
+                    is MyDocumentComponent -> MyDocument(
+                        myDocumentComponent = component,
+                        navComponent = navComponent
+                    )
                 }
             }
 
@@ -134,5 +138,3 @@ fun Window97(
         )
     }
 }
-
-
