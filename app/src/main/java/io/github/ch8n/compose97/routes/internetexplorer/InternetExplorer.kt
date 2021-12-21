@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.runtime.*
 import androidx.compose.ui.viewinterop.AndroidView
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.essenty.backpressed.BackPressedHandler
 import io.github.ch8n.compose97.Logger
 import io.github.ch8n.compose97.navigation.AppNavigation
 import io.github.ch8n.compose97.navigation.DecomposeComponent
@@ -24,6 +25,9 @@ import io.github.ch8n.compose97.ui.components.windowscaffold.WindowScaffold
 class InternetExplorerComponent(
     componentContext: ComponentContext
 ) : DecomposeComponent(componentContext) {
+
+    override val backPressedHandler: BackPressedHandler
+        get() = super.backPressedHandler
 
     private val internetExplorer = Window97Common.InternetExplorer
 
@@ -49,6 +53,8 @@ fun InternetExplorer(
     internetExplorerComponent: InternetExplorerComponent,
     navComponent: AppNavigation,
 ) {
+
+
     val myComputerProps = remember {
         WindowProps(
             statusBar = internetExplorerComponent.statusBar,
@@ -81,7 +87,7 @@ fun InternetExplorer(
 private fun ComposeWebView(
     url: String,
     onPageLoadingStarted: () -> Unit,
-    onPageLoadingFinished: () -> Unit,
+    onPageLoadingFinished: () -> Unit
 ) {
     var currentWebView: WebView? by remember { mutableStateOf(null) }
 
@@ -99,9 +105,11 @@ private fun ComposeWebView(
     AndroidView(
         factory = {
             WebView(it).apply {
+
                 with(settings) {
                     javaScriptEnabled = true
                     loadsImagesAutomatically = true
+                    domStorageEnabled = true
                 }
 
                 scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
