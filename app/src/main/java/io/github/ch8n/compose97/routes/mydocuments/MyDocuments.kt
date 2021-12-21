@@ -16,8 +16,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.ComponentContext
 import io.github.ch8n.compose97.R
+import io.github.ch8n.compose97.navigation.AppNavigation
 import io.github.ch8n.compose97.navigation.DecomposeComponent
-import io.github.ch8n.compose97.navigation.NavigationComponent
 import io.github.ch8n.compose97.routes.window97.Window97Common
 import io.github.ch8n.compose97.ui.components.windowscaffold.StatusBarProps
 import io.github.ch8n.compose97.ui.components.windowscaffold.WindowAddressProps
@@ -31,14 +31,14 @@ class MyDocumentComponent(
     val myDocument = Window97Common.MyDocuments
 
     val statusBar = StatusBarProps(
-        title = myDocument.label,
+        title = "Recent",
         mainIcon = myDocument.iconId
     )
 
     val windowProps = WindowAddressProps(
         iconRes = myDocument.iconId,
         name = myDocument.label,
-        path = "~${myDocument.label.capitalize()}://"
+        path = "~/${myDocument.label.capitalize()}://Recent"
     )
 
     fun recentDocuments(): MutableList<String> {
@@ -60,7 +60,7 @@ class MyDocumentComponent(
 @Composable
 fun MyDocument(
     myDocumentComponent: MyDocumentComponent,
-    navComponent: NavigationComponent,
+    navComponent: AppNavigation,
 ) {
     val recycleBinWindowProps = remember {
         WindowProps(

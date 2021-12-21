@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.ComponentContext
 import io.github.ch8n.compose97.R
 import io.github.ch8n.compose97.navigation.DecomposeComponent
-import io.github.ch8n.compose97.navigation.NavigationComponent
+import io.github.ch8n.compose97.navigation.AppNavigation
 import io.github.ch8n.compose97.routes.window97.Window97Common
 import io.github.ch8n.compose97.ui.components.windowscaffold.StatusBarProps
 import io.github.ch8n.compose97.ui.components.windowscaffold.WindowAddressProps
@@ -71,7 +71,7 @@ class RecycleBinComponent(
 @Composable
 fun RecycleBin(
     recycleBinComponent: RecycleBinComponent,
-    navComponent: NavigationComponent,
+    navComponent: AppNavigation,
 ) {
     val recycleBinWindowProps = remember {
         WindowProps(

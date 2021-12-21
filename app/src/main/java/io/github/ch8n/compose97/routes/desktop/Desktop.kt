@@ -12,7 +12,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.push
 import io.github.ch8n.compose97.navigation.DecomposeComponent
 import io.github.ch8n.compose97.navigation.Destinations
-import io.github.ch8n.compose97.navigation.NavigationComponent
+import io.github.ch8n.compose97.navigation.AppNavigation
 import io.github.ch8n.compose97.routes.window97.Window97Common
 
 class DesktopComponent(
@@ -32,7 +32,7 @@ class DesktopComponent(
 fun Desktop(
     modifier: Modifier,
     desktopComponent: DesktopComponent,
-    navComponent: NavigationComponent,
+    navComponent: AppNavigation,
 ) {
     Box(modifier = modifier) {
         Column(
@@ -44,7 +44,7 @@ fun Desktop(
                     window97Common = desktopItem,
                     onItemClicked = { window97Common ->
                         when (window97Common) {
-                            Window97Common.InternetExplorer -> TODO()
+                            Window97Common.InternetExplorer -> navComponent.router.push(Destinations.InternetExplorer)
                             Window97Common.MyComputer -> navComponent.router.push(Destinations.MyComputer)
                             Window97Common.MyDocuments -> navComponent.router.push(Destinations.MyDocuments)
                             Window97Common.Notepad -> TODO()

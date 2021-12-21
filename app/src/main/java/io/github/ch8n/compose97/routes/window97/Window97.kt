@@ -11,10 +11,12 @@ import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.extensions.compose.jetpack.Children
 import io.github.ch8n.compose97.R
+import io.github.ch8n.compose97.navigation.AppNavigation
 import io.github.ch8n.compose97.navigation.DecomposeComponent
-import io.github.ch8n.compose97.navigation.NavigationComponent
 import io.github.ch8n.compose97.routes.desktop.Desktop
 import io.github.ch8n.compose97.routes.desktop.DesktopComponent
+import io.github.ch8n.compose97.routes.internetexplorer.InternetExplorer
+import io.github.ch8n.compose97.routes.internetexplorer.InternetExplorerComponent
 import io.github.ch8n.compose97.routes.mycomputer.MyComputer
 import io.github.ch8n.compose97.routes.mycomputer.MyComputerComponent
 import io.github.ch8n.compose97.routes.mydocuments.MyDocument
@@ -32,9 +34,7 @@ sealed class Window97Common(val label: String, val iconId: Int) {
     object MyComputer : Window97Common("My Computer", R.drawable.my_computer_32x32)
     object RecyclerBin : Window97Common("Recycle Bin", R.drawable.recycle_bin_32x32)
     object MyDocuments : Window97Common("My Documents", R.drawable.my_documents_folder_32x32)
-    object InternetExplorer :
-        Window97Common("Internet Explorer", R.drawable.internet_explorer_32x32)
-
+    object InternetExplorer : Window97Common("Internet Explorer", R.drawable.internet_explorer_32x32)
     object Notepad : Window97Common("Notepad", R.drawable.notepad_32x32)
 }
 
@@ -75,7 +75,7 @@ class Window97AppComponent(
 
 @Composable
 fun Window97(
-    navComponent: NavigationComponent,
+    navComponent: AppNavigation,
     window97Component: Window97AppComponent
 ) {
     Column(
@@ -111,6 +111,10 @@ fun Window97(
                     )
                     is MyDocumentComponent -> MyDocument(
                         myDocumentComponent = component,
+                        navComponent = navComponent
+                    )
+                    is InternetExplorerComponent -> InternetExplorer(
+                        internetExplorerComponent = component,
                         navComponent = navComponent
                     )
                 }

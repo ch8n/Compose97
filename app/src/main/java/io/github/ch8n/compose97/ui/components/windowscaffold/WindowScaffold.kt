@@ -26,6 +26,7 @@ data class WindowProps(
     val addressBar: WindowAddressProps,
     val isMinimised: Boolean = false,
     val isMaximised: Boolean = false,
+    val showDetailPanel: Boolean = true,
 ) {
     companion object {
         val NoWindow = WindowProps(
@@ -112,59 +113,63 @@ fun WindowScaffold(
                 .border(1.dp, Black)
                 .shadow(2.dp)
         ) {
-
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        Brush.linearGradient(
-                            0.15f to RoyalBlue,
-                            0.30f to White,
-                        )
-                    )
-            ) {
+            if (!props.showDetailPanel) {
+                content.invoke()
+            } else {
                 Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 48.dp, start = 16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                        .fillMaxSize()
+                        .background(
+                            Brush.linearGradient(
+                                0.15f to RoyalBlue,
+                                0.30f to White,
+                            )
+                        )
                 ) {
-                    Icon(
-                        painter = painterResource(id = props.statusBar.mainIcon),
+                    Column(
                         modifier = Modifier
-                            .padding(start = 16.dp)
-                            .size(56.dp),
-                        contentDescription = null,
-                        tint = Color.Unspecified
-                    )
+                            .fillMaxWidth()
+                            .padding(top = 48.dp, start = 16.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = props.statusBar.mainIcon),
+                            modifier = Modifier
+                                .padding(start = 16.dp)
+                                .size(56.dp),
+                            contentDescription = null,
+                            tint = Color.Unspecified
+                        )
 
-                    Text(
-                        text = props.statusBar.title,
-                        style = MaterialTheme.typography.h2,
-                    )
+                        Text(
+                            text = props.statusBar.title,
+                            style = MaterialTheme.typography.h2,
+                        )
 
-                    Box(
-                        modifier =
-                        Modifier
-                            .fillMaxWidth(0.8f)
-                            .height(2.5.dp)
-                            .background(
-                                Brush.horizontalGradient(
-                                    colors = listOf(
-                                        Color.Red,
-                                        Color.Yellow,
-                                        Color.Green,
-                                        Color.Blue
+                        Box(
+                            modifier =
+                            Modifier
+                                .fillMaxWidth(0.8f)
+                                .height(2.5.dp)
+                                .background(
+                                    Brush.horizontalGradient(
+                                        colors = listOf(
+                                            Color.Red,
+                                            Color.Yellow,
+                                            Color.Green,
+                                            Color.Blue
+                                        )
                                     )
                                 )
-                            )
-                    )
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    content.invoke()
                 }
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                content.invoke()
             }
+
         }
     }
 }
