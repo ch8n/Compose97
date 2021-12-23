@@ -7,6 +7,7 @@ import io.github.ch8n.compose97.routes.desktop.DesktopComponent
 import io.github.ch8n.compose97.routes.internetexplorer.InternetExplorerComponent
 import io.github.ch8n.compose97.routes.mycomputer.MyComputerComponent
 import io.github.ch8n.compose97.routes.mydocuments.MyDocumentComponent
+import io.github.ch8n.compose97.routes.notepad.NotePadComponent
 import io.github.ch8n.compose97.routes.recyclebin.RecycleBinComponent
 
 
@@ -28,7 +29,7 @@ class AppNavigation(componentContext: ComponentContext) : DecomposeComponent(com
             is Destinations.InternetExplorer -> InternetExplorerComponent(context)
             is Destinations.MyComputer -> MyComputerComponent(context)
             is Destinations.MyDocuments -> MyDocumentComponent(context)
-            is Destinations.Notepad -> TODO()
+            is Destinations.Notepad -> NotePadComponent(context)
             is Destinations.RecyclerBin -> RecycleBinComponent(context)
         }
     }

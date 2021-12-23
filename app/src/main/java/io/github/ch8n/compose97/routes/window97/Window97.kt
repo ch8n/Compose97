@@ -21,6 +21,8 @@ import io.github.ch8n.compose97.routes.mycomputer.MyComputer
 import io.github.ch8n.compose97.routes.mycomputer.MyComputerComponent
 import io.github.ch8n.compose97.routes.mydocuments.MyDocument
 import io.github.ch8n.compose97.routes.mydocuments.MyDocumentComponent
+import io.github.ch8n.compose97.routes.notepad.NotePad
+import io.github.ch8n.compose97.routes.notepad.NotePadComponent
 import io.github.ch8n.compose97.routes.recyclebin.RecycleBin
 import io.github.ch8n.compose97.routes.recyclebin.RecycleBinComponent
 import io.github.ch8n.compose97.ui.components.startBar.StartBar
@@ -34,7 +36,9 @@ sealed class Window97Common(val label: String, val iconId: Int) {
     object MyComputer : Window97Common("My Computer", R.drawable.my_computer_32x32)
     object RecyclerBin : Window97Common("Recycle Bin", R.drawable.recycle_bin_32x32)
     object MyDocuments : Window97Common("My Documents", R.drawable.my_documents_folder_32x32)
-    object InternetExplorer : Window97Common("Internet Explorer", R.drawable.internet_explorer_32x32)
+    object InternetExplorer :
+        Window97Common("Internet Explorer", R.drawable.internet_explorer_32x32)
+
     object Notepad : Window97Common("Notepad", R.drawable.notepad_32x32)
 }
 
@@ -115,6 +119,10 @@ fun Window97(
                     )
                     is InternetExplorerComponent -> InternetExplorer(
                         internetExplorerComponent = component,
+                        navComponent = navComponent
+                    )
+                    is NotePadComponent -> NotePad(
+                        notePadComponent = component,
                         navComponent = navComponent
                     )
                 }

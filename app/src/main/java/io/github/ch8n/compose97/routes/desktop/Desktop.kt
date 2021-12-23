@@ -47,7 +47,7 @@ fun Desktop(
                             Window97Common.InternetExplorer -> navComponent.router.push(Destinations.InternetExplorer)
                             Window97Common.MyComputer -> navComponent.router.push(Destinations.MyComputer)
                             Window97Common.MyDocuments -> navComponent.router.push(Destinations.MyDocuments)
-                            Window97Common.Notepad -> TODO()
+                            Window97Common.Notepad -> navComponent.router.push(Destinations.Notepad)
                             Window97Common.RecyclerBin -> navComponent.router.push(Destinations.RecyclerBin)
                         }
                     }
