@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -27,6 +29,7 @@ import io.github.ch8n.compose97.ui.theme.Gray
 import io.github.ch8n.compose97.ui.theme.Silver
 import io.github.ch8n.compose97.ui.theme.White
 import io.github.ch8n.compose97.ui.theme.notePadTextStyle
+import io.github.ch8n.compose97.verticalScrollBars
 
 class NotePadComponent(
     componentContext: ComponentContext
@@ -95,13 +98,16 @@ fun NotePad(
             modifier = Modifier.fillMaxWidth()
         )
 
-        Surface(
-            color = White,
+        val scrollState = rememberScrollState()
+        Column(
             modifier = Modifier
                 .background(Silver)
                 .padding(horizontal = 8.dp)
                 .border(1.dp, Gray)
                 .fillMaxSize()
+                .background(White)
+                .verticalScroll(scrollState)
+                .verticalScrollBars(scrollState)
         ) {
             BasicTextField(
                 value = content,
